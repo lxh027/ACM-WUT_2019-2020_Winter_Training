@@ -1,4 +1,4 @@
-# Training Pla
+# Training Plan
 
 ## 第二周
 ### 训练内容
