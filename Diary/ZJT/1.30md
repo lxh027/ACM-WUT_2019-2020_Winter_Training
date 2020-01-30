@@ -1,1 +1,120 @@
 
+##1.29  Educational Codeforces Round 81
+
+###A [Display The Number](https://codeforces.com/contest/1295/problem/A)  
+
+#####题目描述
+
+数字屏上0-9数字点亮分别需要不同的段、给定一定段，问能够点亮的最大的数字是几
+
+##### 题解
+
+对于偶数段 ，则最大数字的每一位都是1就可以，对于奇数段，令第一位数字是7，之后全都是1即可
+
+###B [Infinite Prefixes](https://codeforces.com/contest/1295/problem/B) 
+
+#####题目描述
+
+有一个长度为n的01串，可以无限次叠加，定义一个前缀01差：前$i$项中0比1多的个数，问有多少个前缀01差等于$m$
+
+##### 题解
+
+每一个串存在一个$u​$,即整串的前缀01差，无限前缀能组成的数字仅有前$n​$项前缀01差及无限u的叠加
+
+（注意考虑特殊条件） ~~不考虑就hack~~
+
+### C [Obtain The String](https://codeforces.com/contest/1295/problem/C) 
+
+##### 题目描述
+
+有两个小写字母字符串$s$和$t$,定义操作：每次可将s的一个非连续子串取出，求最小的操作数$n$,可使得$n$次得到的子串连续成为字符串$t$
+
+##### 题解
+
+直接贪心，利用子序列自动机加速
+
+将26个字母保存1个$nex$二维数组，$nex_{ij}$表示第$s$在第$i$个位置后的字母$j $第一次出现的位置,我们在求解过程中：
+
+首先查找t的第一个字母在s中第一次出现的位置，即$nex_{0,t_1}$,找到第一个字母后，寻找t的第二个字母的过程就是在$s$中$t$的第一个字母的位置后继续寻找第一次出现第二个字母的位置，以此类推，若是找不到，则操作数++，重新寻找
+
+```c++
+#include<bits/stdc++.h>
+using namespace std;
+int T;
+char s[100005],t[100005];
+int nxt[100005][26];
+int main()
+{
+    scanf("%d",&T);
+    while(T--)
+    {
+        scanf("%s",s+1);
+        scanf("%s",t+1);
+        int n=strlen(s+1),m=strlen(t+1);
+        for(int j=0;j<26;++j)nxt[n][j]=0;
+        for(int i=n-1;i>=0;--i)
+        {
+            for(int j=0;j<26;++j)nxt[i][j]=nxt[i+1][j];
+            nxt[i][s[i+1]-'a']=i+1;
+        }
+        int now=0,ans=1;
+        for(int i=1;i<=m;++i)
+        {
+            now=nxt[now][t[i]-'a'];
+            if(!now)
+            {
+                ans++;
+                now=nxt[now][t[i]-'a'];
+                if(!now){ans=-1;break;}
+            }
+        }
+        printf("%d\n",ans);
+    }
+    return 0;
+}
+```
+
+### D [Same GCDs](https://codeforces.com/contest/1295/problem/D) 
+
+##### 题目描述
+
+给定$a,m$,计算$\sum\limits_{i = 0}^{m - 1} {[\gcd (a,m) =  = \gcd (a + i,m)]} $
+
+#####题解
+
+$gcd (a,m) = d \to \gcd (\frac{a}{d},\frac{m}{d}) = 1$
+
+则原式可化为
+
+$${\begin{array}{l}\sum\limits_{i = 0}^{m - 1} {[\gcd (a + i,m){\rm{ =  = }}d]} \\ = \sum\limits_{i = 0}^{m - 1} {[\gcd (\frac{{a + i}}{d},\frac{m}{d}){\rm{ =  = }}1]}  = \sum\limits_{i = a}^{m - 1} {[\gcd (\frac{i}{d},\frac{m}{d})]}  + \sum\limits_{i = m{\rm{ + 1}}}^{m + a} {[\gcd (\frac{i}{d},\frac{m}{d})]}  = \sum\limits_{i = {\rm{1}}}^m {[\gcd (\frac{i}{d},\frac{m}{d})]}  = \varphi (\frac{m}{d})\end{array}}$$
+
+直接求欧拉函数即可
+
+### E [Permutation Separation](https://codeforces.com/contest/1295/problem/E) 
+
+##### 题目描述
+
+给一个排列，每个排列中的第$i$个数字为$p_i$,权值为$w_i$.你可以选择一个位置切一刀把它分成左右两部分，然后你可以花费$w_i$把$p_i$移动到另一个部分。最终要保证左半部分的最大值小于右半部分的最小值。
+
+##### 题解
+
+基础还是太弱，看了半天题解感觉终于明白了
+
+首先暴力解法：就是枚举将左右集合分开的位置，然后枚举边界x,使得左边集合大于x的数与右边集合小于x的数花费和最小
+
+线段树解法：
+
+线段树是将枚举的边界x作为叶子节点的
+
+如果能够确定切的位置  左边集合与右边集合均已经确定，每一个叶子节点x保存的是当前集合下以x为边界所需花费，由于线段树维护的是最小值，全局最小值就是当前确定集合的最小花费。
+
+如何更新：
+
+当集合发生改变时，比如说左边集合中新增了右边集合的$y$,权值为$w$,则当前集合下的最优解法中的以比y小的边界均需要将y移动到右边,区间增加$w$，比y大的边界则会略去这一步骤，即区间减去$w$
+
+### F [Good Contest](https://codeforces.com/contest/1295/problem/F) 
+
+##### 略。。。。。 ~~菜的一批做不来~~
+
+
+
