@@ -1,9 +1,8 @@
+## 1.29  Educational Codeforces Round 81
 
-##1.29  Educational Codeforces Round 81
+### A [Display The Number](https://codeforces.com/contest/1295/problem/A)
 
-###A [Display The Number](https://codeforces.com/contest/1295/problem/A)  
-
-#####题目描述
+##### 题目描述
 
 数字屏上0-9数字点亮分别需要不同的段、给定一定段，问能够点亮的最大的数字是几
 
@@ -11,19 +10,19 @@
 
 对于偶数段 ，则最大数字的每一位都是1就可以，对于奇数段，令第一位数字是7，之后全都是1即可
 
-###B [Infinite Prefixes](https://codeforces.com/contest/1295/problem/B) 
+### B [Infinite Prefixes](https://codeforces.com/contest/1295/problem/B)
 
-#####题目描述
+##### 题目描述
 
 有一个长度为n的01串，可以无限次叠加，定义一个前缀01差：前$i$项中0比1多的个数，问有多少个前缀01差等于$m$
 
 ##### 题解
 
-每一个串存在一个$u​$,即整串的前缀01差，无限前缀能组成的数字仅有前$n​$项前缀01差及无限u的叠加
+每一个串存在一个$u$,即整串的前缀01差，无限前缀能组成的数字仅有前$n$项前缀01差及无限u的叠加
 
 （注意考虑特殊条件） ~~不考虑就hack~~
 
-### C [Obtain The String](https://codeforces.com/contest/1295/problem/C) 
+### C [Obtain The String](https://codeforces.com/contest/1295/problem/C)
 
 ##### 题目描述
 
@@ -74,13 +73,13 @@ int main()
 }
 ```
 
-### D [Same GCDs](https://codeforces.com/contest/1295/problem/D) 
+### D [Same GCDs](https://codeforces.com/contest/1295/problem/D)
 
 ##### 题目描述
 
 给定$a,m$,计算$\sum\limits_{i = 0}^{m - 1} {[\gcd (a,m) =  = \gcd (a + i,m)]} $
 
-#####题解
+##### 题解
 
 $gcd (a,m) = d \to \gcd (\frac{a}{d},\frac{m}{d}) = 1$
 
@@ -112,7 +111,7 @@ $${\begin{array}{l}\sum\limits_{i = 0}^{m - 1} {[\gcd (a + i,m){\rm{ =  = }}d]} 
 
 当集合发生改变时，比如说左边集合中新增了右边集合的$y$,权值为$w$,则当前集合下的最优解法中的以比y小的边界均需要将y移动到右边,区间增加$w$，比y大的边界则会略去这一步骤，即区间减去$w$
 
-### F [Good Contest](https://codeforces.com/contest/1295/problem/F) 
+### F [Good Contest](https://codeforces.com/contest/1295/problem/F)
 
 ##### 略。。。。。 ~~菜的一批做不来~~
 
